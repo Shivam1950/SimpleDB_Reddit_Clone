@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="creatingTable.sql" id="Project_879" database="MySql" >
+	<schema name="public" >
+		<table name="Comment" spec="" >
+			<column name="comment_id" type="int" length="11" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="comment" type="varchar" length="1000" jt="12" mandatory="y" >
+				<comment><![CDATA[varchar]]></comment>
+			</column>
+			<column name="user_id" type="int" length="11" jt="4" />
+			<column name="post_id" type="int" length="11" jt="4" />
+			<column name="created_date" type="datetime" jt="93" mandatory="y" />
+			<column name="modified_date" type="datetime" jt="93" mandatory="y" />
+			<column name="upvote" type="int" length="11" jt="4" mandatory="y" />
+			<column name="downvote" type="int" length="11" jt="4" mandatory="y" />
+			<index name="PrimaryKey" unique="PRIMARY_KEY" >
+				<column name="comment_id" />
+			</index>
+			<index name="id" unique="UNIQUE_KEY" >
+				<column name="comment_id" />
+			</index>
+			<fk name="FK_Comment User" to_schema="public" to_table="User" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+			<fk name="FK_Comment Post" to_schema="public" to_table="Post" >
+				<fk_column name="post_id" pk="post_id" />
+			</fk>
+		</table>
+		<table name="ParentChildComment" spec="" >
+			<column name="parentComment_id" type="int" length="11" jt="4" />
+			<column name="childComment_id" type="int" length="11" jt="4" />
+			<fk name="FK_ParentChildComment Comment" to_schema="public" to_table="Comment" >
+				<fk_column name="parentComment_id" pk="comment_id" />
+			</fk>
+			<fk name="FK_ParentChildComment Comment" to_schema="public" to_table="Comment" >
+				<fk_column name="childComment_id" pk="comment_id" />
+			</fk>
+		</table>
+		<table name="Post" spec="" >
+			<column name="post_id" type="int" length="11" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="created_date" type="datetime" jt="93" mandatory="y" />
+			<column name="post" type="varchar" length="1000" jt="12" mandatory="y" />
+			<column name="user_id" type="int" length="11" jt="4" />
+			<index name="PrimaryKey" unique="PRIMARY_KEY" >
+				<column name="post_id" />
+			</index>
+			<index name="id" unique="UNIQUE_KEY" >
+				<column name="post_id" />
+			</index>
+			<fk name="FK_Post User" to_schema="public" to_table="User" >
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+		</table>
+		<table name="User" spec="" >
+			<column name="user_id" type="int" length="11" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="first_name" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="255" jt="12" />
+			<column name="created_date" type="datetime" jt="93" mandatory="y" />
+			<index name="PrimaryKey" unique="PRIMARY_KEY" >
+				<column name="user_id" />
+			</index>
+			<index name="id" unique="UNIQUE_KEY" >
+				<column name="user_id" />
+			</index>
+		</table>
+	</schema>
+	<layout name="Parsed Script Layout" id="Layout_2482" show_relation="columns" >
+		<entity schema="public" name="Comment" color="BED3F4" x="240" y="80" />
+		<entity schema="public" name="ParentChildComment" color="BED3F4" x="528" y="112" />
+		<entity schema="public" name="Post" color="BED3F4" x="48" y="192" />
+		<entity schema="public" name="User" color="BED3F4" x="48" y="48" />
+	</layout>
+</project>
